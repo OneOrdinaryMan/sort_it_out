@@ -26,7 +26,14 @@ impl<T: Ord + Copy> SortStruct<T> {
         }
     }
     fn insertion_sort(&mut self) {
-        todo!()
+        for i in 1..self.vector.len() {
+            let temp = self.vector[i];
+            let mut j = i;
+            while j > 0 && self.vector[j] < self.vector[j - 1] {
+                self.vector.swap(j, j - 1);
+                j -= 1;
+            }
+        }
     }
 }
 fn main() {}
@@ -43,8 +50,8 @@ mod tests {
         let sorted_vector_2 = vec![1, 2, 3, 10];
         let mut sorter_1 = SortStruct::new(test_vector_1);
         let mut sorter_2 = SortStruct::new(test_vector_2);
-        sorter_1.selection_sort();
-        sorter_2.selection_sort();
+        sorter_1.insertion_sort();
+        sorter_2.insertion_sort();
         assert_eq!(sorter_1.vector, sorted_vector_1);
         assert_eq!(sorter_2.vector, sorted_vector_2);
     }
