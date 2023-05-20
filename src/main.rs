@@ -27,7 +27,6 @@ impl<T: Ord + Copy> SortStruct<T> {
     }
     fn insertion_sort(&mut self) {
         for i in 1..self.vector.len() {
-            let temp = self.vector[i];
             let mut j = i;
             while j > 0 && self.vector[j] < self.vector[j - 1] {
                 self.vector.swap(j, j - 1);
