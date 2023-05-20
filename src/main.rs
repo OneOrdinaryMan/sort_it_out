@@ -14,6 +14,17 @@ impl<T: Ord + Copy> SortStruct<T> {
             }
         }
     }
+    fn selection_sort(&mut self) {
+        for i in 0..self.vector.len() - 1 {
+            let mut min = i;
+            for j in i + 1..self.vector.len() {
+                if self.vector[min] > self.vector[j] {
+                    min = j;
+                }
+            }
+            self.vector.swap(i, min);
+        }
+    }
 }
 fn main() {}
 #[cfg(test)]
@@ -26,7 +37,7 @@ mod tests {
         let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
         let sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
         let mut sorter = SortStruct::new(test_vector_1);
-        sorter.bubble_sort();
+        sorter.selection_sort();
         assert_eq!(sorter.vector, sorted_vector_1);
     }
 }
