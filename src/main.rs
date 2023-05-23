@@ -107,6 +107,9 @@ impl<T: Ord + Copy> SortStruct<T> {
         input.swap(i as usize, end as usize);
         i
     }
+    fn reverse(&mut self) {
+        self.vector.reverse();
+    }
 }
 fn main() {}
 #[cfg(test)]
@@ -117,13 +120,17 @@ mod tests {
     #[test]
     fn check_sorted() {
         let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
-        let sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        sorted_vector_1.reverse();
         let test_vector_2 = vec![10, 2, 3, 1];
-        let sorted_vector_2 = vec![1, 2, 3, 10];
+        let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        sorted_vector_2.reverse();
         let mut sorter_1 = SortStruct::new(test_vector_1);
         let mut sorter_2 = SortStruct::new(test_vector_2);
         sorter_1.quick_sort();
+        sorter_1.reverse();
         sorter_2.quick_sort();
+        sorter_2.reverse();
         assert_eq!(sorter_1.vector, sorted_vector_1);
         assert_eq!(sorter_2.vector, sorted_vector_2);
     }
