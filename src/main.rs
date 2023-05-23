@@ -82,6 +82,31 @@ impl<T: Ord + Copy> SortStruct<T> {
             k += 1;
         }
     }
+    fn quick_sort(&mut self) {
+        let len = self.vector.len() - 1;
+        SortStruct::quick_sort_recursion(&mut self.vector, 0, len as isize);
+    }
+    fn quick_sort_recursion(input: &mut Vec<T>, start: isize, end: isize) {
+        if end <= start {
+            return;
+        }
+        let pivot = SortStruct::partition(input, start, end);
+        SortStruct::quick_sort_recursion(input, start, pivot - 1);
+        SortStruct::quick_sort_recursion(input, pivot + 1, end);
+    }
+    fn partition(input: &mut Vec<T>, start: isize, end: isize) -> isize {
+        let pivot = input[end as usize];
+        let mut i = start - 1;
+        for j in start..end {
+            if input[j as usize] < pivot {
+                i += 1;
+                input.swap(i as usize, j as usize);
+            }
+        }
+        i += 1;
+        input.swap(i as usize, end as usize);
+        i
+    }
 }
 fn main() {}
 #[cfg(test)]
@@ -97,8 +122,8 @@ mod tests {
         let sorted_vector_2 = vec![1, 2, 3, 10];
         let mut sorter_1 = SortStruct::new(test_vector_1);
         let mut sorter_2 = SortStruct::new(test_vector_2);
-        sorter_1.merge_sort();
-        sorter_2.merge_sort();
+        sorter_1.quick_sort();
+        sorter_2.quick_sort();
         assert_eq!(sorter_1.vector, sorted_vector_1);
         assert_eq!(sorter_2.vector, sorted_vector_2);
     }
