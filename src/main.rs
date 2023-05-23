@@ -2,9 +2,11 @@ struct SortStruct<T: Ord + Copy> {
     vector: Vec<T>,
 }
 impl<T: Ord + Copy> SortStruct<T> {
+    // Creating the sorter
     fn new(input: Vec<T>) -> SortStruct<T> {
         SortStruct { vector: input }
     }
+    // Bubble Sort
     fn bubble_sort(&mut self) {
         for i in 0..self.vector.len() - 1 {
             for j in 0..self.vector.len() - i - 1 {
@@ -14,6 +16,7 @@ impl<T: Ord + Copy> SortStruct<T> {
             }
         }
     }
+    // Selection Sort
     fn selection_sort(&mut self) {
         for i in 0..self.vector.len() - 1 {
             let mut min = i;
@@ -25,6 +28,7 @@ impl<T: Ord + Copy> SortStruct<T> {
             self.vector.swap(i, min);
         }
     }
+    // Insertion Sort
     fn insertion_sort(&mut self) {
         for i in 1..self.vector.len() {
             let mut j = i;
@@ -34,6 +38,7 @@ impl<T: Ord + Copy> SortStruct<T> {
             }
         }
     }
+    // Merge Sort
     fn merge_sort(&mut self) {
         SortStruct::merge_sort_recurssion(&mut self.vector);
     }
@@ -82,6 +87,7 @@ impl<T: Ord + Copy> SortStruct<T> {
             k += 1;
         }
     }
+    // Quick Sort
     fn quick_sort(&mut self) {
         let len = self.vector.len() - 1;
         SortStruct::quick_sort_recursion(&mut self.vector, 0, len as isize);
@@ -107,6 +113,7 @@ impl<T: Ord + Copy> SortStruct<T> {
         input.swap(i as usize, end as usize);
         i
     }
+    // Reverse
     fn reverse(&mut self) {
         self.vector.reverse();
     }
