@@ -3,7 +3,7 @@ pub mod sorter {
     use std::fmt::Display;
 
     /// All the algorithms have been abstracted to SortStruct.
-    pub struct SortStruct<T: Ord + Copy + Display> {
+    pub struct SortStruct<T: PartialOrd + Copy + Display> {
         pub vector: Vec<T>,
     }
     /// # Tests
@@ -24,7 +24,7 @@ pub mod sorter {
     ///assert_eq!(sorter_1.vector, sorted_vector_1);
     ///assert_eq!(sorter_2.vector, sorted_vector_2);
     ///```
-    impl<T: Ord + Copy + Display> SortStruct<T> {
+    impl<T: PartialOrd + Copy + Display> SortStruct<T> {
         /// Creating the sorter
         pub fn new(input: Vec<T>) -> SortStruct<T> {
             SortStruct { vector: input }
