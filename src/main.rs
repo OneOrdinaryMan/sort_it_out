@@ -8,8 +8,16 @@ struct Cli {
     #[arg(short, long)]
     reverse: bool,
     #[arg(short, long)]
+    integer: bool,
+    #[arg(short, long)]
     sort: Option<String>,
 }
+
+enum InputType<'a> {
+    Slice(Vec<&'a str>),
+    Integer(Vec<isize>),
+}
+
 fn sort_function<T: Copy + PartialOrd + Display>(
     input: Vec<T>,
     sort: Option<String>,
@@ -51,7 +59,17 @@ fn main() {
             input.push(item);
         }
     }
-
-    let input: Vec<&str> = input.iter().map(|x| x.as_str()).collect();
-    sort_function(input, cli.sort, cli.reverse);
+    let input_type = match cli.integer {
+        true => InputType::Integer(
+            input
+                .into_iter()
+                .map(|x| x.parse().expect("Not an integer"))
+                .collect(),
+        ),
+        false => InputType::Slice(input.iter().map(|x| x.as_str()).collect()),
+    };
+    match input_type {
+        InputType::Integer(i) => sort_function(i, cli.sort, cli.reverse),
+        InputType::Slice(s) => sort_function(s, cli.sort, cli.reverse),
+    };
 }
