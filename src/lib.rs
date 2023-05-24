@@ -1,7 +1,6 @@
 //! This program will sort out the input arguments as vector.
 pub mod sorter {
     use std::fmt::Display;
-
     /// All the algorithms have been abstracted to SortStruct.
     pub struct SortStruct<T: PartialOrd + Copy + Display> {
         pub vector: Vec<T>,
@@ -26,10 +25,31 @@ pub mod sorter {
     ///```
     impl<T: PartialOrd + Copy + Display> SortStruct<T> {
         /// Creating the sorter
+        /// # Example
+        /// ```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let sorter_1 = SortStruct::new(test_vector_1.clone());
+        ///assert_eq!(sorter_1.vector,test_vector_1);
+        ///```
         pub fn new(input: Vec<T>) -> SortStruct<T> {
             SortStruct { vector: input }
         }
         /// Bubble Sort
+        /// # Example
+        ///```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        ///let test_vector_2 = vec![10, 2, 3, 1];
+        ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1);
+        ///let mut sorter_2 = SortStruct::new(test_vector_2);
+        ///sorter_1.bubble_sort();
+        ///sorter_2.bubble_sort();
+        ///assert_eq!(sorter_1.vector, sorted_vector_1);
+        ///assert_eq!(sorter_2.vector, sorted_vector_2);
+        ///```
         pub fn bubble_sort(&mut self) {
             for i in 0..self.vector.len() - 1 {
                 for j in 0..self.vector.len() - i - 1 {
@@ -40,6 +60,20 @@ pub mod sorter {
             }
         }
         /// Selection Sort
+        /// # Example
+        ///```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        ///let test_vector_2 = vec![10, 2, 3, 1];
+        ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1);
+        ///let mut sorter_2 = SortStruct::new(test_vector_2);
+        ///sorter_1.selection_sort();
+        ///sorter_2.selection_sort();
+        ///assert_eq!(sorter_1.vector, sorted_vector_1);
+        ///assert_eq!(sorter_2.vector, sorted_vector_2);
+        ///```
         pub fn selection_sort(&mut self) {
             for i in 0..self.vector.len() - 1 {
                 let mut min = i;
@@ -52,6 +86,20 @@ pub mod sorter {
             }
         }
         /// Insertion Sort
+        /// # Example
+        ///```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        ///let test_vector_2 = vec![10, 2, 3, 1];
+        ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1);
+        ///let mut sorter_2 = SortStruct::new(test_vector_2);
+        ///sorter_1.insertion_sort();
+        ///sorter_2.insertion_sort();
+        ///assert_eq!(sorter_1.vector, sorted_vector_1);
+        ///assert_eq!(sorter_2.vector, sorted_vector_2);
+        ///```
         pub fn insertion_sort(&mut self) {
             for i in 1..self.vector.len() {
                 let mut j = i;
@@ -62,6 +110,20 @@ pub mod sorter {
             }
         }
         /// Merge Sort
+        /// # Example
+        ///```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        ///let test_vector_2 = vec![10, 2, 3, 1];
+        ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1);
+        ///let mut sorter_2 = SortStruct::new(test_vector_2);
+        ///sorter_1.merge_sort();
+        ///sorter_2.merge_sort();
+        ///assert_eq!(sorter_1.vector, sorted_vector_1);
+        ///assert_eq!(sorter_2.vector, sorted_vector_2);
+        ///```
         pub fn merge_sort(&mut self) {
             SortStruct::merge_sort_recurssion(&mut self.vector);
         }
@@ -111,6 +173,20 @@ pub mod sorter {
             }
         }
         /// Quick Sort
+        /// # Example
+        ///```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
+        ///let test_vector_2 = vec![10, 2, 3, 1];
+        ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1);
+        ///let mut sorter_2 = SortStruct::new(test_vector_2);
+        ///sorter_1.quick_sort();
+        ///sorter_2.quick_sort();
+        ///assert_eq!(sorter_1.vector, sorted_vector_1);
+        ///assert_eq!(sorter_2.vector, sorted_vector_2);
+        ///```
         pub fn quick_sort(&mut self) {
             let len = self.vector.len() - 1;
             SortStruct::quick_sort_recursion(&mut self.vector, 0, len as isize);
@@ -137,6 +213,15 @@ pub mod sorter {
             i
         }
         /// Reverse
+        /// # Example
+        /// ```
+        ///use sort_it_out::sorter::SortStruct;
+        ///let mut test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
+        ///let mut sorter_1 = SortStruct::new(test_vector_1.clone());
+        ///test_vector_1.reverse();
+        ///sorter_1.reverse();
+        ///assert_eq!(sorter_1.vector, test_vector_1);
+        /// ```
         pub fn reverse(&mut self) {
             self.vector.reverse();
         }

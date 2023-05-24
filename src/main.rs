@@ -1,8 +1,10 @@
 use clap::Parser;
 use sort_it_out::sorter::SortStruct;
 use std::{fmt::Display, io};
+
 #[derive(Parser)]
 #[command(author, version, about, long_about=None)]
+// struct for clap
 struct Cli {
     input: Vec<String>,
     #[arg(short, long)]
@@ -12,12 +14,12 @@ struct Cli {
     #[arg(short, long)]
     sort: Option<String>,
 }
-
+// enum for diffent types that can be used with sorter.
 enum InputType<'a> {
     Slice(Vec<&'a str>),
     Integer(Vec<isize>),
 }
-
+//function for the outputing to stdout.
 fn sort_function<T: Copy + PartialOrd + Display>(
     input: Vec<T>,
     sort: Option<String>,
@@ -43,10 +45,9 @@ fn sort_function<T: Copy + PartialOrd + Display>(
     }
     sorter_1.print_vector();
 }
-
 fn main() {
     let cli = Cli::parse();
-
+    // Getting the input from either the arguments or stdin.
     let mut input: Vec<String> = Vec::new();
 
     if cli.input.len() == 0 {
@@ -59,6 +60,7 @@ fn main() {
             input.push(item);
         }
     }
+    // Converting to the nessasary type.
     let input_type = match cli.integer {
         true => InputType::Integer(
             input
@@ -68,6 +70,7 @@ fn main() {
         ),
         false => InputType::Slice(input.iter().map(|x| x.as_str()).collect()),
     };
+    // Branched execution for different type.
     match input_type {
         InputType::Integer(i) => sort_function(i, cli.sort, cli.reverse),
         InputType::Slice(s) => sort_function(s, cli.sort, cli.reverse),
