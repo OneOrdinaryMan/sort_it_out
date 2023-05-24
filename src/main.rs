@@ -5,6 +5,10 @@ use std::io;
 #[command(author, version, about, long_about=None)]
 struct Cli {
     input: Vec<String>,
+    #[arg(short, long)]
+    reverse: bool,
+    #[arg(short, long)]
+    sort: Option<String>,
 }
 fn main() {
     let cli = Cli::parse();
@@ -25,6 +29,22 @@ fn main() {
     let input = input.iter().map(|x| x.as_str()).collect();
 
     let mut sorter_1 = SortStruct::new(input);
-    sorter_1.quick_sort();
+    match cli.sort {
+        Some(value) => match value.as_str() {
+            "bubble" => sorter_1.bubble_sort(),
+            "selection" => sorter_1.selection_sort(),
+            "insertion" => sorter_1.insertion_sort(),
+            "merge" => sorter_1.merge_sort(),
+            "quick" => sorter_1.quick_sort(),
+            _ => {
+                println!("Cannot find the sort method.");
+                std::process::exit(1);
+            }
+        },
+        None => sorter_1.quick_sort(),
+    }
+    if cli.reverse {
+        sorter_1.reverse();
+    }
     sorter_1.print_vector();
 }
