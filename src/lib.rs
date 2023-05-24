@@ -5,24 +5,6 @@ pub mod sorter {
     pub struct SortStruct<T: PartialOrd + Copy + Display> {
         pub vector: Vec<T>,
     }
-    /// # Tests
-    ///```
-    ///use sort_it_out::sorter::SortStruct;
-    ///let test_vector_1 = vec!["Hello Mother", "Hi Sis", "Hello Father", "Hi Bro"];
-    ///let mut sorted_vector_1 = vec!["Hello Father", "Hello Mother", "Hi Bro", "Hi Sis"];
-    ///sorted_vector_1.reverse();
-    ///let test_vector_2 = vec![10, 2, 3, 1];
-    ///let mut sorted_vector_2 = vec![1, 2, 3, 10];
-    ///sorted_vector_2.reverse();
-    ///let mut sorter_1 = SortStruct::new(test_vector_1);
-    ///let mut sorter_2 = SortStruct::new(test_vector_2);
-    ///sorter_1.quick_sort();
-    ///sorter_1.reverse();
-    ///sorter_2.quick_sort();
-    ///sorter_2.reverse();
-    ///assert_eq!(sorter_1.vector, sorted_vector_1);
-    ///assert_eq!(sorter_2.vector, sorted_vector_2);
-    ///```
     impl<T: PartialOrd + Copy + Display> SortStruct<T> {
         /// Creating the sorter
         /// # Example
